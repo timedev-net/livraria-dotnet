@@ -2,7 +2,7 @@ import React from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { useGlobalStore } from '../store/global'
 
-function TobBar() {
+function TopBar() {
 
   const { toggleSideBar }: any = useGlobalStore(s => s)
   return (
@@ -16,4 +16,4 @@ function TobBar() {
   )
 }
 
-export default TobBar
+export default TopBar

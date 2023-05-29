@@ -16,7 +16,6 @@ export default function LivroCard(props: any) {
         <p className="font-mono font-semibold text-right">R$ <span className='text-4xl'>15</span>,99</p>
         <p className="font-mono  text-right">Frete GRÁTIS</p>
         
-        
       </div>
     </div>
   </>
