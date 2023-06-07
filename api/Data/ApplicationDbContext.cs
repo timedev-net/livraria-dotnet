@@ -7,9 +7,9 @@ using api.Models;
 
 namespace api.Data
 {
-    public class SmartContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
-        public SmartContext(DbContextOptions<SmartContext> options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Autor> Autor { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Genero> Genero { get; set; }

@@ -14,6 +14,8 @@ namespace api.Models
         }
         public int Id { get; set; }
         public string? Nome { get; set; }
+
+        public List<AutorLivro>? Livros { get; set; }
         
     }
 }

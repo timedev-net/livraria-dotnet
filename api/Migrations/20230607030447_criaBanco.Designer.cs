@@ -10,15 +10,30 @@ using api.Data;
 
 namespace api.Migrations
 {
-    [DbContext(typeof(SmartContext))]
-    [Migration("20230516014113_init")]
-    partial class init
+    [DbContext(typeof(ApplicationDbContext))]
+    [Migration("20230607030447_criaBanco")]
+    partial class criaBanco
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
+
+            modelBuilder.Entity("AutorLivro", b =>
+                {
+                    b.Property<int>("AutoresId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LivrosId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AutoresId", "LivrosId");
+
+                    b.HasIndex("LivrosId");
+
+                    b.ToTable("AutorLivro");
+                });
 
             modelBuilder.Entity("api.Models.Autor", b =>
                 {
@@ -77,6 +92,36 @@ namespace api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Livro");
+                });
+
+            modelBuilder.Entity("AutorAutorLivro", b =>
+                {
+                    b.HasOne("api.Models.Autor", null)
+                        .WithMany()
+                        .HasForeignKey("AutoresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("api.Models.AutorLivro", null)
+                        .WithMany()
+                        .HasForeignKey("LivrosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AutorLivroLivro", b =>
+                {
+                    b.HasOne("api.Models.AutorLivro", null)
+                        .WithMany()
+                        .HasForeignKey("AutoresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("api.Models.Livro", null)
+                        .WithMany()
+                        .HasForeignKey("LivrosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
