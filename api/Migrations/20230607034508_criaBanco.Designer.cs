@@ -11,7 +11,7 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230607030447_criaBanco")]
+    [Migration("20230607034508_criaBanco")]
     partial class criaBanco
     {
         /// <inheritdoc />
@@ -19,21 +19,6 @@ namespace api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
-
-            modelBuilder.Entity("AutorLivro", b =>
-                {
-                    b.Property<int>("AutoresId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("LivrosId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("AutoresId", "LivrosId");
-
-                    b.HasIndex("LivrosId");
-
-                    b.ToTable("AutorLivro");
-                });
 
             modelBuilder.Entity("api.Models.Autor", b =>
                 {
@@ -47,6 +32,27 @@ namespace api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Autor");
+                });
+
+            modelBuilder.Entity("api.Models.AutorLivro", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AutorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LivroId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AutorId");
+
+                    b.HasIndex("LivroId");
+
+                    b.ToTable("AutorLivro");
                 });
 
             modelBuilder.Entity("api.Models.Cliente", b =>
@@ -94,34 +100,33 @@ namespace api.Migrations
                     b.ToTable("Livro");
                 });
 
-            modelBuilder.Entity("AutorAutorLivro", b =>
+            modelBuilder.Entity("api.Models.AutorLivro", b =>
                 {
-                    b.HasOne("api.Models.Autor", null)
-                        .WithMany()
-                        .HasForeignKey("AutoresId")
+                    b.HasOne("api.Models.Autor", "Autor")
+                        .WithMany("AutorLivros")
+                        .HasForeignKey("AutorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("api.Models.AutorLivro", null)
-                        .WithMany()
-                        .HasForeignKey("LivrosId")
+                    b.HasOne("api.Models.Livro", "Livro")
+                        .WithMany("AutorLivros")
+                        .HasForeignKey("LivroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Autor");
+
+                    b.Navigation("Livro");
                 });
 
-            modelBuilder.Entity("AutorLivroLivro", b =>
+            modelBuilder.Entity("api.Models.Autor", b =>
                 {
-                    b.HasOne("api.Models.AutorLivro", null)
-                        .WithMany()
-                        .HasForeignKey("AutoresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("AutorLivros");
+                });
 
-                    b.HasOne("api.Models.Livro", null)
-                        .WithMany()
-                        .HasForeignKey("LivrosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("api.Models.Livro", b =>
+                {
+                    b.Navigation("AutorLivros");
                 });
 #pragma warning restore 612, 618
         }

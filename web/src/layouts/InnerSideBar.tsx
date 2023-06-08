@@ -9,14 +9,12 @@ function InnerSideBar() {
       <h1 className=' mb-6 text-white font-mono font-bold text-3xl'>Library' Williams</h1>
       <hr className='w-10/12 mb-6'/>
       <div className='flex flex-col gap-2 -z-20'>
-        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-500' to={'/#'}>Teste</Link>
-        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-500' to={'/#'}>Teste</Link>
-        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-500' to={'/#'}>Teste</Link>
-        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-500' to={'/#'}>Teste</Link>
-        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-500' to={'/#'}>Teste</Link>
-        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-500' to={'/#'}>Teste</Link>
-        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-500' to={'/#'}>Teste</Link>
-       
+        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-500' to={'/autores'}>Autores</Link>
+        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-500' to={'/livros'}>Livros</Link>
+        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-500' to={'/generos'}>Generos</Link>
+        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-500' to={'/carrinho'}>Carrinho</Link>
+        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-500' to={'/novousuario'}>Criar Conta</Link>
+        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-500' to={'/minhaconta'}>Minha Conta</Link>
         
       </div>
     </div>
