@@ -1,5 +1,5 @@
 import AutorCard from "../components/AutorCard";
-import CarrinhoCard from "../components/CarrinhoCard";
+import CarrinhoList from "../components/CarrinhoList";
 
 export default function MinhaConta() {
 
@@ -10,9 +10,11 @@ export default function MinhaConta() {
 
 
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-white mb-5 font-mono w-[50%]">Procure por Autor:</h1>
+        <h1 className="text-white mb-5 font-mono w-[50%]">Minha Conta:</h1>
         <div className="flex flex-wrap gap-4 max-w-[60%] justify-center">
-          <CarrinhoCard/>
+          <CarrinhoList/>
+          <CarrinhoList/>
+          <CarrinhoList/>
         </div>
       </div>
 

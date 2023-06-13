@@ -1,9 +1,52 @@
+import { useEffect, useState } from "react";
 import LivroCard from "../components/LivroCard";
+import { useParams } from "react-router-dom";
 
 export default function LivroDetalhes() {
 
   const a = new Array(15).fill(1)
+  const params = useParams();
+  const [listCar, setListCar] = useState<any[]>([])
+  const [inCar, setInCar] = useState<boolean>(false)
+  
+  const addToCar = () => {
+    const list = JSON.parse(localStorage.getItem('ListCar') || "[]")
+    if (list.filter((e: any) => e.id === params.id).length === 0) {
+      const newList = [...list, {
+        id: params.id,
+        titulo: "nome do livro 1",
+        preco: 12.99
+      }]
+      setListCar(newList)
+      localStorage.setItem('ListCar', JSON.stringify(newList))
+      setInCar(true)
+    }
+  }
 
+  const removeToCar = () => {
+    const list = JSON.parse(localStorage.getItem('ListCar') || "[]")
+    const listFilter = list.filter((e: any) => e.id !== params.id)
+    setListCar(listFilter)
+    localStorage.setItem('ListCar', JSON.stringify(listFilter))
+    setInCar(false)
+  }
+
+  
+  useEffect(() => {
+    const list = JSON.parse(localStorage.getItem('ListCar') || "[]")
+    if (list.filter((e: any) => e.id === params.id).length !== 0) {
+      setInCar(true)
+    }
+    setListCar(list)
+  }, [])
+  
+  useEffect(() => {
+    console.log(params.id)
+  }, [params])
+  useEffect(() => {
+    console.log(listCar)
+  }, [listCar])
+  
   return (
     <>
 
@@ -14,7 +57,7 @@ export default function LivroDetalhes() {
           
 <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <a href="#">
-        <img className="p-8 rounded-t-lg" src={`https://picsum.photos/id/6/300/200`} alt="product image" />
+        <img className="p-8 rounded-t-lg" src={`https://picsum.photos/id/${params.id}/300/200`} alt="product image" />
     </a>
     <div className="px-5 pb-5">
         <a href="#">
@@ -30,7 +73,7 @@ export default function LivroDetalhes() {
         </div>
         <div className="flex items-center justify-between">
             <span className="text-3xl font-bold text-gray-900 dark:text-white">R$ 15,99</span>
-            <a href="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Adicionar ao carrinho</a>
+            <button onClick={inCar? removeToCar : addToCar} className={`text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center `+ (inCar? `dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 bg-red-700 hover:bg-red-800 focus:ring-red-300`: `dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 bg-blue-700 hover:bg-blue-800 focus:ring-blue-300`)}>{inCar?`Remover do `:`Adicionar ao `} carrinho</button>
         </div>
     </div>
 </div>

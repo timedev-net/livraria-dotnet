@@ -9,6 +9,7 @@ import AutoresList from "../pages/AutoresList";
 import GenerosList from "../pages/GenerosList";
 import LivroDetalhes from "../pages/LivroDetalhes";
 import MinhaConta from "../pages/MinhaConta";
+import CarrinhoList from "../pages/CarrinhoList";
 
 
 export const routes = createBrowserRouter([
@@ -22,7 +23,7 @@ export const routes = createBrowserRouter([
           element: <LivrosList/>
         },
         {
-          path: 'livro/1',
+          path: 'livro/:id',
           element: <LivroDetalhes/>
         },
         {
@@ -38,9 +39,21 @@ export const routes = createBrowserRouter([
           element: <MinhaConta/>
         },
         {
+          path: 'carrinho',
+          element: <CarrinhoList/>
+        },
+        {
           path: 'novousuario',
           element: <NovoUsuario/>
         }
       ]
     },
+    {
+      path: "*",
+      element: (
+        <h1 className="grid place-items-center h-screen">
+          Página não encontrada
+        </h1>
+      ),
+    },  
   ]);
