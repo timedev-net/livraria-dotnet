@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api.Data;
 using api.Models;
+using api.Dto;
 
 namespace api.Controllers
 {
@@ -84,12 +85,15 @@ namespace api.Controllers
         // POST: api/Autor
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Autor>> PostAutor(Autor autor)
+        public async Task<ActionResult<Autor>> PostAutor(AutorDto dto)
         {
           if (_context.Autor == null)
           {
               return Problem("Entity set 'ApplicationDbContext.Autor'  is null.");
           }
+
+            var autor = new Autor();
+            autor.Nome = dto.Nome;
             _context.Autor.Add(autor);
             await _context.SaveChangesAsync();
 

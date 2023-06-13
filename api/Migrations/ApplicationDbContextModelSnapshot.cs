@@ -33,19 +33,13 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.AutorLivro", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("AutorId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("LivroId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("AutorId");
+                    b.HasKey("AutorId", "LivroId");
 
                     b.HasIndex("LivroId");
 
@@ -86,10 +80,11 @@ namespace api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Nome")
+                    b.Property<DateOnly>("PublicadoEm")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("PublicadoEm")
+                    b.Property<string>("Titulo")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api.Data;
 using api.Models;
+using api.Dto;
 
 namespace api.Controllers
 {
@@ -34,20 +35,22 @@ namespace api.Controllers
 
         // GET: api/Livro/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Livro>> GetLivro(int id)
+        public async Task<ActionResult> GetLivro(int id)
         {
           if (_context.Livro == null)
           {
               return NotFound();
           }
-            var livro = await _context.Livro.FindAsync(id);
-
+            var livro = await _context.Livro.Include(p => p.AutorLivros)
+            .ThenInclude(p => p.Autor)
+            .FirstOrDefaultAsync(p => p.Id == id);
+            
             if (livro == null)
             {
                 return NotFound();
             }
 
-            return livro;
+            return Ok(new { livro.Titulo, livro.Id, Autores = livro.AutorLivros.Select(p => p.Autor) });
         }
 
         // PUT: api/Livro/5
@@ -84,12 +87,24 @@ namespace api.Controllers
         // POST: api/Livro
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Livro>> PostLivro(Livro livro)
+        public async Task<ActionResult<Livro>> PostLivro(LivroDto dto)
         {
           if (_context.Livro == null)
           {
               return Problem("Entity set 'ApplicationDbContext.Livro'  is null.");
           }
+
+            var livro = new Livro();
+            livro.Titulo = dto.Titulo!;
+            livro.PublicadoEm = dto.PublicadoEm!;
+            livro.AutorLivros = new List<AutorLivro>();
+
+            foreach (var id in dto.AutoresId!) {
+                var autorLivro = new AutorLivro();
+                autorLivro.AutorId = id;
+                livro.AutorLivros.Add(autorLivro);
+            }
+
             _context.Livro.Add(livro);
             await _context.SaveChangesAsync();
 

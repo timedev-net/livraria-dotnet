@@ -56,7 +56,7 @@ namespace api.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(type: "TEXT", nullable: true),
+                    Titulo = table.Column<string>(type: "TEXT", nullable: false),
                     PublicadoEm = table.Column<DateOnly>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -68,14 +68,12 @@ namespace api.Migrations
                 name: "AutorLivro",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
                     AutorId = table.Column<int>(type: "INTEGER", nullable: false),
                     LivroId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AutorLivro", x => x.Id);
+                    table.PrimaryKey("PK_AutorLivro", x => new { x.AutorId, x.LivroId });
                     table.ForeignKey(
                         name: "FK_AutorLivro_Autor_AutorId",
                         column: x => x.AutorId,
@@ -89,11 +87,6 @@ namespace api.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AutorLivro_AutorId",
-                table: "AutorLivro",
-                column: "AutorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AutorLivro_LivroId",
