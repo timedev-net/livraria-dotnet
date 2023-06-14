@@ -19,12 +19,16 @@ namespace api.Data
         {
             builder.Entity<Autor>().HasKey(p => p.Id);
             builder.Entity<Livro>().HasKey(p => p.Id);
+            builder.Entity<Genero>().HasKey(p => p.Id);
 
             builder.Entity<AutorLivro>().HasKey(p => new {p.AutorId, p.LivroId});
+            builder.Entity<GeneroLivro>().HasKey(p => new {p.GeneroId, p.LivroId});
 
             builder.Entity<Autor>().HasMany(p => p.AutorLivros).WithOne(p => p.Autor).HasForeignKey(p => p.AutorId);
             builder.Entity<Livro>().HasMany(p => p.AutorLivros).WithOne(p => p.Livro).HasForeignKey(p => p.LivroId);
-            
+
+            builder.Entity<Livro>().HasMany(p => p.GeneroLivros).WithOne(p => p.Livro).HasForeignKey(p => p.LivroId);
+            builder.Entity<Genero>().HasMany(p => p.GeneroLivros).WithOne(p => p.Genero).HasForeignKey(p => p.GeneroId);
         }
     }
 }
