@@ -13,5 +13,7 @@ namespace api.Models
         public DateOnly PublicadoEm { get; set; }
         public IList<AutorLivro>? AutorLivros { get; set; }
         public IList<GeneroLivro>? GeneroLivros { get; set; }
+
+        public IList<Venda>? Vendas { get; set; }
     }
 }

@@ -12,6 +12,6 @@ namespace api.Models
         public string? Email { get; set; }
 
         public string? Cpf { get; set; }
-        
+        public IList<Venda>? Vendas { get; set; }
     }
 }

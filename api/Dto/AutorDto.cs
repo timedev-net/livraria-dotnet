@@ -7,6 +7,6 @@ namespace api.Dto
 {
     public class AutorDto
     {
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
     }
 }
