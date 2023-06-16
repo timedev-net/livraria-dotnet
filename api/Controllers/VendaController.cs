@@ -41,7 +41,7 @@ namespace api.Controllers
           {
               return NotFound();
           }
-            var venda = await _context.Venda.Include(p => p.Livro).ThenInclude(p => p.Livro)
+            var venda = await _context.Venda.Include(p => p.Livro).ThenInclude(p => p.Vendas)
             .FirstOrDefaultAsync(p => p.Id == id);
 
             if (venda == null)
@@ -49,7 +49,7 @@ namespace api.Controllers
                 return NotFound();
             }
 
-            return Ok(new { venda.Id, venda.Total, venda.Status, Livro = livro.Vendas.Select(p => p.Livro)});
+            return Ok(new { venda.Id, venda.Total, venda.Status});
         }
 
         // PUT: api/Venda/5
