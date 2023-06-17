@@ -1,6 +1,6 @@
 import React from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
-import { useGlobalStore } from '../store/global'
+import { useGlobalStore } from '../store/useGlobalStore'
 
 function TopBar() {
 

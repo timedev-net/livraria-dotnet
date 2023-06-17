@@ -1,4 +1,4 @@
-import AutorCard from "../components/AutorCard";
+import AutorCard from "../../components/AutorCard";
 
 export default function GenerosList() {
 

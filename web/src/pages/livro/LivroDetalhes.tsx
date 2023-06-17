@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import LivroCard from "../components/LivroCard";
+import LivroCard from "../../components/LivroCard";
 import { useParams } from "react-router-dom";
 
 export default function LivroDetalhes() {

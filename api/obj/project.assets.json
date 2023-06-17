@@ -11390,7 +11390,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\Users\\drfro\\Documents\\IFRO\\MonoRepoLivraria\\api\\api.csproj",
-      "projectName": "api",
+      "projectName": "Livraria API",
       "projectPath": "C:\\Users\\drfro\\Documents\\IFRO\\MonoRepoLivraria\\api\\api.csproj",
       "packagesPath": "C:\\Users\\drfro\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\drfro\\Documents\\IFRO\\MonoRepoLivraria\\api\\obj\\",

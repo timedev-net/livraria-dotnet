@@ -1,4 +1,4 @@
-import { useGlobalStore } from '../store/global'
+import { useGlobalStore } from '../store/useGlobalStore'
 import { Link } from "react-router-dom";
 
 function SideBar() {

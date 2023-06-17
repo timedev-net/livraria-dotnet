@@ -1,17 +1,16 @@
-import LivroCard from "../components/LivroCard";
+import { useForm } from "react-hook-form";
 
-export default function NovoUsuario() {
+export default function AutorForm() {
 
-  const a = new Array(15).fill(1)
 
   return (
     <>
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-white mb-5 font-mono w-[50%]">Preencha o formulário para criar sua conta:</h1>
+        <h1 className="text-white mb-5 font-mono w-[50%]">Preencha o formulário corretamente:</h1>
         <div className="flex flex-wrap gap-4 max-w-[60%] justify-center">
 
           <a href="#" className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Cadastro</h5>
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Cadastro do Autor</h5>
             <form>
 
               <div className="grid md:grid-cols-2 md:gap-6">
