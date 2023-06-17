@@ -52,6 +52,12 @@ namespace api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Cpf")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Nome")
                         .HasColumnType("TEXT");
 
@@ -106,6 +112,46 @@ namespace api.Migrations
                     b.ToTable("Livro");
                 });
 
+            modelBuilder.Entity("api.Models.Venda", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly?>("DataCompra")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool?>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<float?>("Total")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.ToTable("Venda");
+                });
+
+            modelBuilder.Entity("api.Models.VendaItens", b =>
+                {
+                    b.Property<int>("VendaId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LivroId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("VendaId", "LivroId");
+
+                    b.HasIndex("LivroId");
+
+                    b.ToTable("VendaItens");
+                });
+
             modelBuilder.Entity("api.Models.AutorLivro", b =>
                 {
                     b.HasOne("api.Models.Autor", "Autor")
@@ -144,9 +190,44 @@ namespace api.Migrations
                     b.Navigation("Livro");
                 });
 
+            modelBuilder.Entity("api.Models.Venda", b =>
+                {
+                    b.HasOne("api.Models.Cliente", "Cliente")
+                        .WithMany("Vendas")
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("api.Models.VendaItens", b =>
+                {
+                    b.HasOne("api.Models.Livro", "Livro")
+                        .WithMany("VendaItens")
+                        .HasForeignKey("LivroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("api.Models.Venda", "Venda")
+                        .WithMany("VendaItens")
+                        .HasForeignKey("VendaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Livro");
+
+                    b.Navigation("Venda");
+                });
+
             modelBuilder.Entity("api.Models.Autor", b =>
                 {
                     b.Navigation("AutorLivros");
+                });
+
+            modelBuilder.Entity("api.Models.Cliente", b =>
+                {
+                    b.Navigation("Vendas");
                 });
 
             modelBuilder.Entity("api.Models.Genero", b =>
@@ -159,6 +240,13 @@ namespace api.Migrations
                     b.Navigation("AutorLivros");
 
                     b.Navigation("GeneroLivros");
+
+                    b.Navigation("VendaItens");
+                });
+
+            modelBuilder.Entity("api.Models.Venda", b =>
+                {
+                    b.Navigation("VendaItens");
                 });
 #pragma warning restore 612, 618
         }

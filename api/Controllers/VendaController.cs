@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api.Data;
 using api.Models;
-using api.Dto;
 
 namespace api.Controllers
 {
@@ -35,21 +34,20 @@ namespace api.Controllers
 
         // GET: api/Venda/5
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetVenda(int id)
+        public async Task<ActionResult<Venda>> GetVenda(int id)
         {
           if (_context.Venda == null)
           {
               return NotFound();
           }
-            var venda = await _context.Venda.Include(p => p.Livro).ThenInclude(p => p.Vendas)
-            .FirstOrDefaultAsync(p => p.Id == id);
+            var venda = await _context.Venda.FindAsync(id);
 
             if (venda == null)
             {
                 return NotFound();
             }
 
-            return Ok(new { venda.Id, venda.Total, venda.Status});
+            return venda;
         }
 
         // PUT: api/Venda/5

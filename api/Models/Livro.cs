@@ -9,11 +9,9 @@ namespace api.Models
     {
         public int Id { get; set; }
         public string? Titulo { get; set; }
-
         public DateOnly PublicadoEm { get; set; }
         public IList<AutorLivro>? AutorLivros { get; set; }
         public IList<GeneroLivro>? GeneroLivros { get; set; }
-
-        public IList<Venda>? Vendas { get; set; }
+        public IList<VendaItens>? VendaItens { get; set; }
     }
 }
