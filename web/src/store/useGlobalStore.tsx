@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { livrariaService } from '../services/livrariaApi'
+import { toast } from "react-toastify";
 
 export const useGlobalStore = create((set) => ({
   // showSideBar: true,
@@ -26,10 +27,16 @@ export const useGlobalStore = create((set) => ({
     const res = await livrariaService.get(`/Autor/${id}`)
     set(() => ({ autorShow: res.data }))
   },
+  createAutor: async (data: object) => {
+    toast.success(`cadastrado com sucesso!`);
+    return await livrariaService.post(`/Autor`, data)
+  },
   updateAutorById: async (id: number, data: object) => {
+    toast.success(`atualizado com sucesso!`);
     return await livrariaService.put(`/Autor/${id}`, data)
   },
   deleteAutorById: async (id: number) => {
+    toast.success(`removido com sucesso!`);
     return await livrariaService.delete(`/Autor/${id}`)
   },
 

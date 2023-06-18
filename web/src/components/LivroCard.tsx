@@ -1,4 +1,4 @@
-import { BsCart4, BsHeartFill } from 'react-icons/bs'
+import { MdEditSquare } from 'react-icons/md'
 import { Link } from 'react-router-dom';
 
 export default function LivroCard(props: any) {
@@ -10,7 +10,7 @@ export default function LivroCard(props: any) {
       <Link to={`/livro/${props.idx+1}`}>
         <img className="cursor-pointer float-left shadow-xl relative -left-5 top-1 -mr-2 mb-1 w-auto h-52" src={`https://picsum.photos/id/${props.idx+1}/160/200`}/>
       </Link>
-        <button title='Adicionar aos favoritos' className='hover:bg-green-200 p-1 rounded-md float-right inline'><BsHeartFill className="inline text-gray-700"/></button>
+        <button title='Adicionar aos favoritos' className='p-1 rounded-md float-right inline'><MdEditSquare className="inline text-gray-700"/></button>
         {/* <button title='Adiciona no carrinho' className='hover:bg-green-200 p-1 rounded-md float-right inline'>+<BsCart4 className="inline text-gray-700"/></button> */}
         <h1 className="cursor-pointer text-xl leading-6 mb-1 font-semibold hover:text-gray-500">Nome do Livro</h1> 
         <p className="font-semibold">Frota, Daniel</p>
@@ -18,7 +18,11 @@ export default function LivroCard(props: any) {
         <p className="text-sm mb-2">Ficção Científica, Terror</p>
         <p className="font-mono font-semibold text-right">R$ <span className='text-4xl'>15</span>,99</p>
         <p className="font-mono  text-right">Frete GRÁTIS</p>
-        
+        <div className="flex gap-2">
+                        {/* <button onClick={() => { navigate('/autor/cadastro') }} className={`text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>Ver</button> */}
+                        {/* <button onClick={() => { getAutorById(e.id); navigate('/autor/cadastro/'+e.id) }} className={`text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>Editar</button> */}
+                        {/* <button onClick={() => { deleteAutorById(e.id) }} className={`text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>Excluir</button> */}
+                      </div>
       </div>
     </div>
   </>

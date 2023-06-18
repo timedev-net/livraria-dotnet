@@ -11,6 +11,7 @@ import LivroDetalhes from "../pages/livro/LivroDetalhes";
 import MinhaConta from "../pages/MinhaConta";
 import CarrinhoList from "../pages/venda/CarrinhoList";
 import AutorForm from "../pages/autor/AutorForm";
+import LivroForm from "../pages/livro/LivroForm";
 
 
 export const routes = createBrowserRouter([
@@ -20,21 +21,48 @@ export const routes = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'generos',
-        element: <GenerosList />
-      },
-      {
         path: 'minhaconta',
         element: <MinhaConta />
       },
+
+    ]
+  },
+  {
+    path: "/carrinho",
+    element: <LayoutPublic />,
+    children: [
       {
-        path: 'carrinho',
-        element: <CarrinhoList />
+        path: '',
+        element: <CarrinhoList />,
+      }
+    ]
+  },
+  {
+    path: "/cliente",
+    element: <LayoutPublic />,
+    children: [
+      {
+        path: '',
+        element: <GenerosList />,
       },
       {
-        path: 'novocliente',
-        element: <NovoCliente />
-      }
+        path: 'cadastro',
+        element: <NovoCliente />,
+      },
+    ]
+  },
+  {
+    path: "/genero",
+    element: <LayoutPublic />,
+    children: [
+      {
+        path: '',
+        element: <GenerosList />,
+      },
+      {
+        path: 'cadastro',
+        element: <AutorForm />,
+      },
     ]
   },
   {
@@ -47,6 +75,10 @@ export const routes = createBrowserRouter([
       },
       {
         path: 'cadastro',
+        element: <AutorForm />,
+      },
+      {
+        path: 'cadastro/:id',
         element: <AutorForm />,
       },
     ]
@@ -65,7 +97,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: 'cadastro',
-        element: <AutorForm />,
+        element: <LivroForm />,
       },
     ]
   },

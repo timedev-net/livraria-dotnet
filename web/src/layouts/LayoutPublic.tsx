@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import TopBar from "./TopBar";
 // import SideBar from "./SideBar";
 import InnerSideBar from "./InnerSideBar";
+import { ToastContainer } from "react-toastify";
 
 export default function LayoutPublic() {
 
@@ -15,6 +16,7 @@ export default function LayoutPublic() {
           <Outlet/>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
