@@ -59,6 +59,8 @@ namespace api.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Titulo = table.Column<string>(type: "TEXT", nullable: true),
+                    ImagemCapa = table.Column<string>(type: "TEXT", nullable: true),
+                    Preco = table.Column<double>(type: "REAL", nullable: true),
                     PublicadoEm = table.Column<DateOnly>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>

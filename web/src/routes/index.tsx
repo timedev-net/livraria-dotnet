@@ -12,7 +12,8 @@ import MinhaConta from "../pages/MinhaConta";
 import CarrinhoList from "../pages/venda/CarrinhoList";
 import AutorForm from "../pages/autor/AutorForm";
 import LivroForm from "../pages/livro/LivroForm";
-
+import GeneroList from "../pages/genero/GenerosList";
+import GeneroForm from "../pages/genero/GeneroForm";
 
 export const routes = createBrowserRouter([
   {
@@ -61,7 +62,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: 'cadastro',
-        element: <AutorForm />,
+        element: <GeneroForm />,
       },
     ]
   },
@@ -86,6 +87,7 @@ export const routes = createBrowserRouter([
   {
     path: "/livro",
     element: <LayoutPublic />,
+    loader: () => { return 'teste'},
     children: [
       {
         path: '',

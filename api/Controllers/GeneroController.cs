@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api.Data;
 using api.Models;
+using api.Dto;
 
 namespace api.Controllers
 {
@@ -25,10 +26,10 @@ namespace api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Genero>>> GetGenero()
         {
-          if (_context.Genero == null)
-          {
-              return NotFound();
-          }
+            if (_context.Genero == null)
+            {
+                return NotFound();
+            }
             return await _context.Genero.ToListAsync();
         }
 
@@ -36,10 +37,10 @@ namespace api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Genero>> GetGenero(int id)
         {
-          if (_context.Genero == null)
-          {
-              return NotFound();
-          }
+            if (_context.Genero == null)
+            {
+                return NotFound();
+            }
             var genero = await _context.Genero.FindAsync(id);
 
             if (genero == null)
@@ -84,16 +85,19 @@ namespace api.Controllers
         // POST: api/Genero
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Genero>> PostGenero(Genero genero)
+        public async Task<ActionResult<Genero>> PostGenero(GeneroDto dto)
         {
-          if (_context.Genero == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Genero'  is null.");
-          }
-            _context.Genero.Add(genero);
+            if (_context.Autor == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Autor'  is null.");
+            }
+
+            var obj = new Genero();
+            obj.Nome = dto.Nome;
+            _context.Genero.Add(obj);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGenero", new { id = genero.Id }, genero);
+            return CreatedAtAction("GetAutor", new { id = obj.Id }, obj);
         }
 
         // DELETE: api/Genero/5

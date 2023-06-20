@@ -19,9 +19,10 @@ export const useGlobalStore = create((set) => ({
   clienteShow: null,
 
   // Autor
-  getAutorAll: async () => {
+  getAutorAll: async (filter?: any) => {
     const res = await livrariaService.get('/Autor')
-    set(() => ({ autoresList: res.data }))
+    set(() => ({ autoresList: res.data.map((e: any) => ({...e, checked: false})) }))
+    return res.data
   },
   getAutorById: async (id: number) => {
     const res = await livrariaService.get(`/Autor/${id}`)
@@ -39,11 +40,15 @@ export const useGlobalStore = create((set) => ({
     toast.success(`removido com sucesso!`);
     return await livrariaService.delete(`/Autor/${id}`)
   },
+  attAutoresList: (payload: any) => {
+    set(() => ({ autoresList: payload }))
+  },
 
   // Cliente
   getClienteAll: async () => {
     const res = await livrariaService.get('/Cliente')
-    set(() => ({ clientesList: res.data }))
+    set(() => ({ clientesList: res.data.map((e: any) => ({...e, checked: false})) }))
+    return res.data
   },
   getClienteById: async (id: number) => {
     const res = await livrariaService.get(`/Cliente/${id}`)
@@ -59,11 +64,16 @@ export const useGlobalStore = create((set) => ({
   // Genero
   getGeneroAll: async () => {
     const res = await livrariaService.get('/Genero')
-    set(() => ({ generosList: res.data }))
+    set(() => ({ generosList: res.data.map((e: any) => ({...e, checked: false})) }))
+    return res.data
   },
   getGeneroById: async (id: number) => {
     const res = await livrariaService.get(`/Genero/${id}`)
     set(() => ({ generoShow: res.data }))
+  },
+  createGenero: async (data: object) => {
+    toast.success(`cadastrado com sucesso!`);
+    return await livrariaService.post(`/genero`, data)
   },
   updateGeneroById: async (id: number, data: object) => {
     return await livrariaService.put(`/Genero/${id}`, data)
@@ -71,15 +81,23 @@ export const useGlobalStore = create((set) => ({
   deleteGeneroById: async (id: number) => {
     return await livrariaService.delete(`/Genero/${id}`)
   },
+  attGenerosList: (payload: any) => {
+    set(() => ({ generosList: payload }))
+  },
 
   // Livro
   getLivroAll: async () => {
     const res = await livrariaService.get('/Livro')
     set(() => ({ livrosList: res.data }))
+    return res.data
   },
   getLivroById: async (id: number) => {
     const res = await livrariaService.get(`/Livro/${id}`)
-    set(() => ({ LivroShow: res.data }))
+    set(() => ({ livroShow: res.data }))
+  },
+  createLivro: async (data: object) => {
+    toast.success(`cadastrado com sucesso!`);
+    return await livrariaService.post(`/Livro`, data)
   },
   updateLivroById: async (id: number, data: object) => {
     return await livrariaService.put(`/Livro/${id}`, data)
@@ -92,6 +110,7 @@ export const useGlobalStore = create((set) => ({
   getVendaAll: async () => {
     const res = await livrariaService.get('/Venda')
     set(() => ({ vendasList: res.data }))
+    return res.data
   },
   getVendaById: async (id: number) => {
     const res = await livrariaService.get(`/Venda/${id}`)

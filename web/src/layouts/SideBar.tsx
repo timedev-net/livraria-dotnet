@@ -1,18 +1,25 @@
-import { useGlobalStore } from '../store/useGlobalStore'
+// import { useGlobalStore } from '../store/useGlobalStore'
 import { Link } from "react-router-dom";
 
 function SideBar() {
 
-  const { showSideBar }: any = useGlobalStore(s => s)
-  return (
-    <div className={`bg-gradient-to-b from-green-300 to-blue-400 transition-all shadow-lg overflow-hidden w-[20%] flex flex-col mt-8 pt-10 px-3 ${!showSideBar && '-ml-[19%] hover:ml-0'}`}>
-      navbar {`${showSideBar}`}
-      <Link to={'/livros'}>Livros</Link>
-      <Link to={'/teste'}>teste</Link>
-      <Link to={'/teste'}>teste</Link>
-      <Link to={'/teste'}>teste</Link>
-      <Link to={'/teste'}>teste</Link>
+  // const { showSideBar }: any = useGlobalStore(s => s)
+  return (<>
+    <div className={`z-0 absolute top-20 text-center flex flex-col pt-10`}>
+      <h1 className=' mb-6 text-white font-mono font-bold text-3xl'>Library' Williams</h1>
+      <hr className='w-10/12 mb-6'/>
+      <div className='flex flex-col gap-2 -z-20'>
+        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-700' to={'/autor'}>Autores</Link>
+        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-700' to={'/livro'}>Livros</Link>
+        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-700' to={'/genero'}>Generos</Link>
+        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-700' to={'/cliente'}>Clientes</Link>
+        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-700' to={'/carrinho'}>Carrinho</Link>
+        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-700' to={'/venda'}>Vendas</Link>
+        <Link className='text-white font-mono font-bold text-xl rounded-xl p-3 hover:bg-gray-700' to={'/minhaconta'}>Minha Conta</Link>
+        
+      </div>
     </div>
+  </>
   )
 }
 

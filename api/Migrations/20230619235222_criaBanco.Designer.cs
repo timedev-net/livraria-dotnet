@@ -11,7 +11,7 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230617173424_criaBanco")]
+    [Migration("20230619235222_criaBanco")]
     partial class criaBanco
     {
         /// <inheritdoc />
@@ -103,6 +103,12 @@ namespace api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("ImagemCapa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double?>("Preco")
+                        .HasColumnType("REAL");
 
                     b.Property<DateOnly>("PublicadoEm")
                         .HasColumnType("TEXT");

@@ -101,6 +101,12 @@ namespace api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("ImagemCapa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double?>("Preco")
+                        .HasColumnType("REAL");
+
                     b.Property<DateOnly>("PublicadoEm")
                         .HasColumnType("TEXT");
 

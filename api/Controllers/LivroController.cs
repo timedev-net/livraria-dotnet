@@ -24,15 +24,28 @@ namespace api.Controllers
 
         // GET: api/Livro
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Livro>>> GetLivro()
+        public async Task<ActionResult<IEnumerable<Object>>> GetLivro()
         {
           if (_context.Livro == null)
           {
               return NotFound();
           }
-            return await _context.Livro.ToListAsync();
+            // return await _context.Livro.ToListAsync();
+
+            var result = await _context.Livro
+            .Select(p => new{ p.Id,
+                p.Titulo,
+                p.ImagemCapa,
+                p.PublicadoEm,
+                p.Preco,
+                autor = p.AutorLivros.Select(e => new{ id = e.Autor.Id, nome = e.Autor.Nome}),
+                genero = p.GeneroLivros.Select(e => new{ id = e.Genero.Id, nome = e.Genero.Nome}),
+            })
+            .ToListAsync();
+            return result;
         }
 
+        // Console.WriteLine("Helloooooooooooooooooooooooooooooooooooooooooooooooooooooo");
         // GET: api/Livro/5
         [HttpGet("{id}")]
         public async Task<ActionResult> GetLivro(int id)
@@ -41,8 +54,18 @@ namespace api.Controllers
           {
               return NotFound();
           }
-            var livro = await _context.Livro.Include(p => p.AutorLivros)
-            .ThenInclude(p => p.Autor)
+            // var livro = await _context.Livro.Include(p => p.AutorLivros)
+            // .ThenInclude(p => p.Autor)
+            // .FirstOrDefaultAsync(p => p.Id == id);
+            var livro = await _context.Livro
+            .Select(p => new{ p.Id,
+                p.Titulo,
+                p.ImagemCapa,
+                p.PublicadoEm,
+                p.Preco,
+                autor = p.AutorLivros.Select(e => new{ id = e.Autor.Id, nome = e.Autor.Nome}),
+                genero = p.GeneroLivros.Select(e => new{ id = e.Genero.Id, nome = e.Genero.Nome}),
+            })
             .FirstOrDefaultAsync(p => p.Id == id);
             
             if (livro == null)
@@ -50,7 +73,7 @@ namespace api.Controllers
                 return NotFound();
             }
 
-            return Ok(new { livro.Titulo, livro.Id, Autores = livro.AutorLivros.Select(p => p.Autor) });
+            return Ok(livro);
         }
 
         // PUT: api/Livro/5
@@ -89,6 +112,7 @@ namespace api.Controllers
         [HttpPost]
         public async Task<ActionResult<Livro>> PostLivro(LivroDto dto)
         {
+            
           if (_context.Livro == null)
           {
               return Problem("Entity set 'ApplicationDbContext.Livro'  is null.");
@@ -97,12 +121,20 @@ namespace api.Controllers
             var livro = new Livro();
             livro.Titulo = dto.Titulo!;
             livro.PublicadoEm = dto.PublicadoEm!;
+            livro.ImagemCapa = dto.ImagemCapa!;
+            livro.Preco = dto.Preco!;
             livro.AutorLivros = new List<AutorLivro>();
+            livro.GeneroLivros = new List<GeneroLivro>();
 
             foreach (var id in dto.AutoresId!) {
                 var autorLivro = new AutorLivro();
                 autorLivro.AutorId = id;
                 livro.AutorLivros.Add(autorLivro);
+            }
+            foreach (var id in dto.GenerosId!) {
+                var generoLivro = new GeneroLivro();
+                generoLivro.GeneroId = id;
+                livro.GeneroLivros.Add(generoLivro);
             }
 
             _context.Livro.Add(livro);

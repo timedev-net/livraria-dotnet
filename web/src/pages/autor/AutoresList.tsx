@@ -27,7 +27,7 @@ export default function AutoresList() {
           <div className="relative overflow-x-auto">
             <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
             
-              <button onClick={() => { navigate('/autor/cadastro') }} className={`text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>Novo Autor</button>
+              <button onClick={() => { navigate('/autor/cadastro') }} className={`text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>+ Autor</button>
             </div>
             <table className="w-[50vw] text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

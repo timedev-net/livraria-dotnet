@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function LivrosList() {
 
-  const a = new Array(15).fill(1)
+  
   const navigate = useNavigate();
   const { livrosList, getLivroAll }: any = useGlobalStore(s => s)
 
@@ -25,7 +25,11 @@ export default function LivrosList() {
         <button onClick={() => { navigate('/livro/cadastro') }} className={`text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>+ Livro</button>
         <div className="flex flex-wrap gap-4 max-w-[60%] justify-center">
           
-          {livrosList.map((e, i) => <LivroCard idx={i} />)}
+          {livrosList.map((e, i) => (
+            <div key={i}>
+              <LivroCard el={e} idx={i} />
+            </div>
+          ))}
         </div>
       </div>
 
