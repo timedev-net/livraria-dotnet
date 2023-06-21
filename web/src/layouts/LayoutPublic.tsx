@@ -6,19 +6,19 @@ import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 
 export default function LayoutPublic() {
- 
-  
+
+
 
   return (
-    <div className=" bg-slate-500 h-[100vh]">
-      <TopBar/>
-      <div className="flex pt-10">
-        <div className="w-[100%]  mt-10 p-5 overflow-auto">
-          <SideBar/>
-          <Outlet/>
+    <>
+      <div className=" bg-slate-500 min-h-screen w-max pt-20">
+        <TopBar />
+        <div className="flex pt-10">
+          <SideBar />
+          <Outlet />
         </div>
-          <ToastContainer />
       </div>
-    </div>
+      <ToastContainer />
+    </>
   );
 }

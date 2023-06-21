@@ -11,6 +11,7 @@ export const useGlobalStore = create((set) => ({
   generosList: [],
   vendasList: [],
   clientesList: [],
+  carrinhoList: [],
 
   autorShow: null,
   livroShow: null,
@@ -45,8 +46,8 @@ export const useGlobalStore = create((set) => ({
   },
 
   // Cliente
-  getClienteAll: async () => {
-    const res = await livrariaService.get('/Cliente')
+  getClienteAll: async (cpf: string) => {
+    const res = await livrariaService.get(`/Cliente${cpf ? ('?cpf='+cpf): ''}`)
     set(() => ({ clientesList: res.data.map((e: any) => ({...e, checked: false})) }))
     return res.data
   },
@@ -54,10 +55,16 @@ export const useGlobalStore = create((set) => ({
     const res = await livrariaService.get(`/Cliente/${id}`)
     set(() => ({ clienteShow: res.data }))
   },
+  createCliente: async (data: object) => {
+    const res = await livrariaService.post(`/Cliente`, data)
+    toast.success(`Cliente criado com sucesso!`);
+    return res.data
+  },
   updateClienteById: async (id: number, data: object) => {
     return await livrariaService.put(`/Cliente/${id}`, data)
   },
   deleteClienteById: async (id: number) => {
+    toast.success(`Removido com sucesso!`);
     return await livrariaService.delete(`/Cliente/${id}`)
   },
 
@@ -79,6 +86,7 @@ export const useGlobalStore = create((set) => ({
     return await livrariaService.put(`/Genero/${id}`, data)
   },
   deleteGeneroById: async (id: number) => {
+    toast.success(`removido com sucesso!`);
     return await livrariaService.delete(`/Genero/${id}`)
   },
   attGenerosList: (payload: any) => {
@@ -103,6 +111,7 @@ export const useGlobalStore = create((set) => ({
     return await livrariaService.put(`/Livro/${id}`, data)
   },
   deleteLivroById: async (id: number) => {
+    toast.success(`removido com sucesso!`);
     return await livrariaService.delete(`/Livro/${id}`)
   },
 
@@ -116,10 +125,18 @@ export const useGlobalStore = create((set) => ({
     const res = await livrariaService.get(`/Venda/${id}`)
     set(() => ({ vendaShow: res.data }))
   },
+  createVenda: async (data: object) => {
+    toast.success(`Venda realizada com sucesso!`);
+    return await livrariaService.post(`/Venda`, data)
+  },
   updateVendaById: async (id: number, data: object) => {
     return await livrariaService.put(`/Venda/${id}`, data)
   },
   deleteVendaById: async (id: number) => {
+    toast.success(`removido com sucesso!`);
     return await livrariaService.delete(`/Venda/${id}`)
+  },
+  handleCarrinhoList: (data: any) => {
+    set(() => ({ carrinhoList: data }))
   },
 }))

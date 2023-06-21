@@ -18,12 +18,10 @@ export default function LivrosList() {
 
   return (
     <>
-
-
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="text-white mb-5 font-mono w-[50%]">Livros diponíveis à venda:</h1>
-        <button onClick={() => { navigate('/livro/cadastro') }} className={`text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>+ Livro</button>
-        <div className="flex flex-wrap gap-4 max-w-[60%] justify-center">
+      <div className="flex flex-col items-center justify-center mx-10 w-full">
+        <h1 className="text-white mb-5 font-mono w-full">Livros diponíveis à venda:</h1>
+        <button onClick={() => { navigate('/livro/cadastro') }} className={` text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>+ Livro</button>
+        <div className="mt-2 flex flex-wrap gap-4 max-w-[70%] justify-center">
           
           {livrosList.map((e, i) => (
             <div key={i}>

@@ -38,7 +38,7 @@ namespace api.Controllers
                 p.ImagemCapa,
                 p.PublicadoEm,
                 p.Preco,
-                autor = p.AutorLivros.Select(e => new{ id = e.Autor.Id, nome = e.Autor.Nome}),
+                autor = p.AutorLivros.Select(e => new { id = e.Autor.Id, nome = e.Autor.Nome}),
                 genero = p.GeneroLivros.Select(e => new{ id = e.Genero.Id, nome = e.Genero.Nome}),
             })
             .ToListAsync();

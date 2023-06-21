@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api.Data;
 using api.Models;
+using api.Dto;
 
 namespace api.Controllers
 {
@@ -23,13 +24,23 @@ namespace api.Controllers
 
         // GET: api/Venda
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Venda>>> GetVenda()
+        public async Task<ActionResult<IEnumerable<Object>>> GetVenda()
         {
           if (_context.Venda == null)
           {
               return NotFound();
           }
-            return await _context.Venda.ToListAsync();
+            // return await _context.Venda.ToListAsync();
+            var result = await _context.Venda
+            .Select(p => new{ p.Id,
+                p.DataCompra,
+                p.Total,
+                p.Status,
+                p.Cliente,
+                itens = p.VendaItens.Select(e => e.Livro),
+            })
+            .ToListAsync();
+            return Ok(result);
         }
 
         // GET: api/Venda/5
@@ -84,16 +95,30 @@ namespace api.Controllers
         // POST: api/Venda
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Venda>> PostVenda(Venda venda)
+        public async Task<ActionResult<Venda>> PostVenda(VendaDto dto)
         {
           if (_context.Venda == null)
           {
               return Problem("Entity set 'ApplicationDbContext.Venda'  is null.");
           }
+            var venda = new Venda();
+            venda.ClienteId = dto.ClienteId;
+            venda.DataCompra = dto.DataCompra;
+            venda.Total = dto.Total;
+            venda.Status = dto.Status;
+            venda.VendaItens = new List<VendaItens>();
+
+            foreach (var id in dto.LivrosId!) {
+                var vendaItens = new VendaItens();
+                vendaItens.LivroId = id;
+                venda.VendaItens.Add(vendaItens);
+            }
+
             _context.Venda.Add(venda);
+
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVenda", new { id = venda.Id }, venda);
+            return Ok(new {id = venda.Id});
         }
 
         // DELETE: api/Venda/5

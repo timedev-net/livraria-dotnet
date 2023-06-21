@@ -23,6 +23,7 @@ namespace api.Data
             builder.Entity<Genero>().HasKey(p => p.Id);
             builder.Entity<Venda>().HasKey(p => p.Id);
             builder.Entity<Cliente>().HasKey(p => p.Id);
+            builder.Entity<Cliente>().HasIndex(p => p.Cpf).IsUnique();
 
             builder.Entity<AutorLivro>().HasKey(p => new {p.AutorId, p.LivroId});
             builder.Entity<GeneroLivro>().HasKey(p => new {p.GeneroId, p.LivroId});

@@ -24,23 +24,30 @@ namespace api.Controllers
 
         // GET: api/Cliente
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cliente>>> GetCliente()
+        public async Task<ActionResult<IEnumerable<Cliente>>> GetCliente([FromQuery(Name = "cpf")] string? cpf)
         {
-          if (_context.Cliente == null)
-          {
-              return NotFound();
-          }
+            // Console.WriteLine(cpf); // se tiver cpf filtra a consulta
+            if (_context.Cliente == null)
+            {
+                return NotFound();
+            }
+
+            if (cpf?.Length == 11)
+            {
+                return await _context.Cliente.Where(c => c.Cpf == cpf).ToListAsync();
+            }
             return await _context.Cliente.ToListAsync();
+
         }
 
         // GET: api/Cliente/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Cliente>> GetCliente(int id)
         {
-          if (_context.Cliente == null)
-          {
-              return NotFound();
-          }
+            if (_context.Cliente == null)
+            {
+                return NotFound();
+            }
             var cliente = await _context.Cliente.FindAsync(id);
 
             if (cliente == null)
@@ -87,15 +94,12 @@ namespace api.Controllers
         [HttpPost]
         public async Task<ActionResult<Cliente>> PostCliente(ClienteDto dto)
         {
-          if (_context.Cliente == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Cliente'  is null.");
-          }
-            var cliente = new Cliente();
-            cliente.Nome = dto.Nome;
-            cliente.Cpf = dto.Cpf;
+            if (_context.Cliente == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Cliente'  is null.");
+            }
+            var cliente = new Cliente(dto.Nome, dto.Cpf);
             cliente.Email = dto.Email;
-            
             _context.Cliente.Add(cliente);
             await _context.SaveChangesAsync();
 

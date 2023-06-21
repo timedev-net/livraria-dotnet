@@ -1,4 +1,5 @@
 import {
+  Link,
   createBrowserRouter,
 } from "react-router-dom";
 import ErrorPage from "../layouts/ErrorPage";
@@ -8,12 +9,15 @@ import NovoCliente from "../pages/cliente/NovoCliente";
 import AutoresList from "../pages/autor/AutoresList";
 import GenerosList from "../pages/genero/GenerosList";
 import LivroDetalhes from "../pages/livro/LivroDetalhes";
-import MinhaConta from "../pages/MinhaConta";
+// import MinhaConta from "../pages/MinhaConta";
 import CarrinhoList from "../pages/venda/CarrinhoList";
 import AutorForm from "../pages/autor/AutorForm";
 import LivroForm from "../pages/livro/LivroForm";
 import GeneroList from "../pages/genero/GenerosList";
 import GeneroForm from "../pages/genero/GeneroForm";
+import VendasList from "../pages/venda/VendasList";
+import Home from "../pages/Home";
+import ClientesList from "../pages/cliente/ClientesList";
 
 export const routes = createBrowserRouter([
   {
@@ -22,29 +26,20 @@ export const routes = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'minhaconta',
-        element: <MinhaConta />
+        path: '',
+        element: <Home />
       },
 
     ]
   },
-  {
-    path: "/carrinho",
-    element: <LayoutPublic />,
-    children: [
-      {
-        path: '',
-        element: <CarrinhoList />,
-      }
-    ]
-  },
+  
   {
     path: "/cliente",
     element: <LayoutPublic />,
     children: [
       {
         path: '',
-        element: <GenerosList />,
+        element: <ClientesList />,
       },
       {
         path: 'cadastro',
@@ -92,6 +87,35 @@ export const routes = createBrowserRouter([
       {
         path: '',
         element: <LivrosList />,
+      },
+      {
+        path: ':id',
+        element: <LivroDetalhes />
+      },
+      {
+        path: 'cadastro',
+        element: <LivroForm />,
+      },
+    ]
+  },
+  {
+    path: "/carrinho",
+    element: <LayoutPublic />,
+    children: [
+      {
+        path: '',
+        element: <CarrinhoList />,
+      }
+    ]
+  },
+  {
+    path: "/venda",
+    element: <LayoutPublic />,
+    loader: () => { return 'teste'},
+    children: [
+      {
+        path: '',
+        element: <VendasList />,
       },
       {
         path: ':id',

@@ -7,7 +7,7 @@ namespace api.Dto
 {
     public class VendaDto
     {
-        public int ClinteId { get; set; }
+        public int ClienteId { get; set; }
         public IList<int>? LivrosId { get; set; }
         public DateOnly DataCompra { get; set; }
         public float Total { get; set; }

@@ -11,7 +11,7 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230619235222_criaBanco")]
+    [Migration("20230621201029_criaBanco")]
     partial class criaBanco
     {
         /// <inheritdoc />
@@ -56,15 +56,20 @@ namespace api.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Cpf")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Cpf")
+                        .IsUnique();
 
                     b.ToTable("Cliente");
                 });

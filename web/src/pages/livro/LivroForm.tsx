@@ -16,6 +16,7 @@ export default function LivroForm(props: any) {
     generosList,
     attAutoresList,
     attGenerosList,
+    getLivroAll,
   }: any = useGlobalStore(s => s)
   const [idParam, setIdParam] = useState<number>();
   const [dropAutores, setDropAutores] = useState<boolean>(false);
@@ -44,19 +45,17 @@ export default function LivroForm(props: any) {
 
   // const pesquisa_autor = watch('pesquisa_autor')
 
-  async function onSubmit(data: any) {
-    
+  async function onSubmit(data: any) {    
     const autoresId = autoresList.reduce((a: any, el: any) => el.checked? a = [...a, el.id] : a, [])
     const generosId = generosList.reduce((a: any, el: any) => el.checked? a = [...a, el.id] : a, [])
-    
 
     console.log(data)
-
     if (idParam) {
-      updateLivroById(idParam, { id: idParam, ...data })
+      await updateLivroById(idParam, { id: idParam, ...data })
     } else {
-      createLivro({...data, preco: +data.preco.replace(',', '.'), autoresId, generosId})
+      await createLivro({...data, preco: +data.preco.replace(',', '.'), autoresId, generosId})
     }
+    await getLivroAll()
     navigate('/Livro')
     // console.log({...data, autoresId, generosId})
     // console.log(autoresId)
@@ -102,10 +101,8 @@ export default function LivroForm(props: any) {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="text-white mb-5 font-mono w-[50%]">Preencha o formulário corretamente:</h1>
-        <div className="flex flex-wrap gap-4 max-w-[80%] justify-center">
-
+      <div className="flex flex-col items-center justify-center mx-10">
+        <h1 className="text-white mb-5 font-mono w-full">Preencha o formulário corretamente:</h1>
           <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800">
             <h5 className="mb-8 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Cadastro do Livro</h5>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -175,12 +172,7 @@ export default function LivroForm(props: any) {
              </div>
             </form>
           </div>
-
-
-        </div>
-
       </div>
-
     </>
   );
 }

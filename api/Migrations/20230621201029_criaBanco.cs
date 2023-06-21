@@ -30,9 +30,9 @@ namespace api.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    Cpf = table.Column<string>(type: "TEXT", nullable: true)
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    Cpf = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -166,6 +166,12 @@ namespace api.Migrations
                 name: "IX_AutorLivro_LivroId",
                 table: "AutorLivro",
                 column: "LivroId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cliente_Cpf",
+                table: "Cliente",
+                column: "Cpf",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_GeneroLivro_LivroId",
