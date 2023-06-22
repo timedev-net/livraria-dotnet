@@ -110,7 +110,7 @@ namespace api.Controllers
         // POST: api/Livro
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Livro>> PostLivro(LivroDto dto)
+        public async Task<ActionResult<Object>> PostLivro(LivroDto dto)
         {
             
           if (_context.Livro == null)
@@ -140,7 +140,7 @@ namespace api.Controllers
             _context.Livro.Add(livro);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLivro", new { id = livro.Id }, livro);
+            return Ok(new { id = livro.Id });
         }
 
         // DELETE: api/Livro/5

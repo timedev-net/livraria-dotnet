@@ -22,3 +22,22 @@ dotnet ef migrations list
 
 # Comandos projeto WEB
 - npm run dev
+
+# REQUISITOS DO PROJETO - Prof. Willians de Paula Pereira
+
+Implementação do padrão MVC
+Projeto Model
+Projeto View
+Projeto Controller
+Mapeamento do banco nas classes
+Implementação de integração com o banco de dados (ADO.NET)
+CRUD Livro
+CRUD Autor
+CRUD Gênero
+CRUD Cliente
+Executar Stored Procedure para realização da venda do livro
+Implementação do carrinho de compras para venda dos livros
+A venda só poderá ser realizada para clientes previamente cadastrados
+Apresentar relatório em tela dos livros vendidos
+Permitir a busca de livros com filtro por gênero
+Permitir a busca de clientes

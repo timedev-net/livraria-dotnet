@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { MdOutlineRemoveShoppingCart } from 'react-icons/md'
-import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import ModalFinalizaPedido from "../../components/ModalFinalizaPedido";
 import { useGlobalStore } from "../../store/useGlobalStore";
 
 export default function CarrinhoList(props: any) {
 
   const { handleCarrinhoList, carrinhoList }: any = useGlobalStore(s => s)
-
-  // const [carrinhoList, handleCarrinhoList] = useState<any[]>([])
+  const navigate = useNavigate();
   const [openModal, setOpenModal] = useState<boolean>(false)
 
   const removeToCar = (id: number) => {
@@ -24,11 +23,10 @@ export default function CarrinhoList(props: any) {
   }, [])
 
   return (
+<>
 
-    <div className="mx-10 w-full flex flex-col items-center justify-center">
-      <div className="w-full">
-        <h1 className="text-white mb-5 font-mono">Lista do Carrinho:</h1>
-      </div>
+    <div className="w-full mx-10 flex flex-col items-center">
+      <h1 className="text-white mb-5 font-mono w-full">Lista do Carrinho:</h1>
       <div className="w-3/5 min-w-min bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
         <h5 className="mb-4 text-xl font-bold leading-none text-gray-900 dark:text-white">Meu Carrinho</h5>
         <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -36,7 +34,7 @@ export default function CarrinhoList(props: any) {
             <li key={i} className="py-3 sm:py-4">
               <div className="flex items-center space-x-4">
                 <div className="flex-shrink-0">
-                  <img className="w-20 h-30" src={e.imagemCapa} alt="image" />
+                  <img className="w-20 h-30 cursor-pointer" src={e.imagemCapa} alt="image" onClick={() => {navigate(`/livro/${e.id}`)}} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-xl font-medium text-gray-900 truncate dark:text-white">
@@ -66,7 +64,7 @@ export default function CarrinhoList(props: any) {
               <div className="flex-1 min-w-0">
               </div>
               <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                <span className="text-xl whitespace-nowrap">R$ {carrinhoList.reduce((acc, item) => acc + item.preco, 0)}</span>
+                <span className="text-xl whitespace-nowrap">R$ {carrinhoList.reduce((acc, item) => acc + item.preco, 0).toFixed(2)}</span>
               </div>
               <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                 {carrinhoList.length > 0 && <button onClick={() => { setOpenModal(true) }} className={`text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 bg-green-700 hover:bg-green-800 focus:ring-green-300`}>
@@ -80,5 +78,6 @@ export default function CarrinhoList(props: any) {
         <ModalFinalizaPedido openModal={openModal} setOpenModal={setOpenModal} />
       </div>
     </div>
+    </>
   );
 }

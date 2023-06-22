@@ -9,6 +9,7 @@ export default function ModalFinalizaPedido({openModal, setOpenModal}: any) {
     register,
     handleSubmit,
     setValue, watch,
+    reset
   } = useForm({});
   const { createVenda, createCliente, getClienteAll, carrinhoList }: any = useGlobalStore(s => s)
   const navigate = useNavigate();
@@ -18,9 +19,9 @@ export default function ModalFinalizaPedido({openModal, setOpenModal}: any) {
   async function onSubmit(data: any) {
     if (hasClient) {
       createVenda({
-        clienteId: hasClient.id,
+        clienteId: hasClient[0].id,
         livrosId: carrinhoList.map((e: any) => e.id),
-        dataCompra: new Date(),
+        dataCompra: new Date().toISOString().split('T')[0],
         total: carrinhoList.reduce((a: number, e: any) => a + e.preco, 0),
         status: true
       })
@@ -29,7 +30,7 @@ export default function ModalFinalizaPedido({openModal, setOpenModal}: any) {
       createVenda({
         clienteId: client.id,
         livrosId: carrinhoList.map((e: any) => e.id),
-        dataCompra: new Date(),
+        dataCompra: new Date().toISOString().split('T')[0],
         total: carrinhoList.reduce((a: number, e: any) => a + e.preco, 0),
         status: true
       })
@@ -53,6 +54,7 @@ export default function ModalFinalizaPedido({openModal, setOpenModal}: any) {
   function closeModal() {
     setHasClient(false)
     setOpenModal(false)
+    reset()
   }
 
   useEffect(() => {
@@ -85,7 +87,7 @@ export default function ModalFinalizaPedido({openModal, setOpenModal}: any) {
                 </div>
                 <div>
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
-                <input {...register("email")} type="text" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                <input {...register("email")} type="text" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
                 </div>
 
                 <button type="submit" className="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Finalizar Venda</button>

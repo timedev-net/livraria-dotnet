@@ -105,7 +105,7 @@ namespace api.Controllers
             venda.ClienteId = dto.ClienteId;
             venda.DataCompra = dto.DataCompra;
             venda.Total = dto.Total;
-            venda.Status = dto.Status;
+            venda.Status = true;
             venda.VendaItens = new List<VendaItens>();
 
             foreach (var id in dto.LivrosId!) {

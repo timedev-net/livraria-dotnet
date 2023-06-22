@@ -11,6 +11,5 @@ namespace api.Dto
         public IList<int>? LivrosId { get; set; }
         public DateOnly DataCompra { get; set; }
         public float Total { get; set; }
-        public bool Status { get; set; }
     }
 }

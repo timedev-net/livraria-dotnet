@@ -1,28 +1,21 @@
 import { useEffect } from "react";
 import { useGlobalStore } from '../../store/useGlobalStore'
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export default function VendasList() {
 
-  const navigate = useNavigate();
-  const { vendasList, getVendaAll, deleteVendaById, getVendaById }: any = useGlobalStore(s => s)
-
-  // const verLivrosByVenda = () => {
-
-  // }
+  // const navigate = useNavigate();
+  const { vendasList, getVendaAll, deleteVendaById }: any = useGlobalStore(s => s)
 
   useEffect(() => {
     getVendaAll()
   }, [])
-  useEffect(() => {
-    console.log(vendasList)
-  }, [vendasList])
 
   return (
     <>
       <div className="w-full mx-10">
-        <h1 className="text-white mb-5 font-mono">Procure por Venda:</h1>
-        <button onClick={() => { navigate('/venda/cadastro') }} className={`text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>+ Venda</button>
+        <h1 className="text-white mb-5 font-mono">Relatório de Vendas:</h1>
+        {/* <button onClick={() => { navigate('/venda/cadastro') }} className={`text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>+ Venda</button> */}
         <table className="min-w-full mt-2 text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -63,7 +56,7 @@ export default function VendasList() {
                     {e.itens.map(el => (<li className="whitespace-nowrap" key={el.id}>{el.titulo}</li>))}
                   </ul>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 whitespace-nowrap font-bold">
                   R$ {Number(e.total).toFixed(2)}
                 </td>
                 <td className="px-6 py-4">

@@ -43,7 +43,7 @@ export default function AutoresList() {
                 </th>
                 <td className="px-6 py-4">
                   <div className="flex gap-2">
-                    <button onClick={() => { navigate('/autor/cadastro') }} className={`text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>Ver Livros</button>
+                    {/* <button onClick={() => { navigate('/autor/cadastro') }} className={`text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>Ver Livros</button> */}
                     <button onClick={() => { getAutorById(e.id); navigate('/autor/cadastro/' + e.id) }} className={`text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>Editar</button>
                     <button onClick={async () => { await deleteAutorById(e.id); getAutorAll() }} className={`text-white rounded text-sm px-1.5 py-1 bg-gray-600`}>Excluir</button>
                   </div>

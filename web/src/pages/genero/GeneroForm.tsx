@@ -41,8 +41,8 @@ export default function GeneroForm() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="text-white mb-5 font-mono w-[50%]">Preencha o formulário corretamente:</h1>
+      <div className="w-full mx-10 flex flex-col items-center">
+      <h1 className="text-white mb-5 font-mono w-full">Preencha o formulário corretamente:</h1>
         <div className="flex flex-wrap gap-4 max-w-[60%] justify-center">
 
           <a href="#" className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800">

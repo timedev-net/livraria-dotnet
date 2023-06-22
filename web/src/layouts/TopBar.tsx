@@ -7,7 +7,7 @@ function TopBar() {
         <AiOutlineMenu className='text-xl' />
       </button> */}
       <img src='\src\assets\bobesponja.png' className='z-2 absolute left-20 h-24 mt-6'/>
-      <h1 className="text-white text-4xl font-semibold font-mono">Livraria do Prof. William</h1>
+      <h1 className="text-white text-4xl font-semibold font-mono">Livraria do Prof. Willians</h1>
     </div>
   )
 }

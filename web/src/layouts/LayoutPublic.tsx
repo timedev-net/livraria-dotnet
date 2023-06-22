@@ -11,7 +11,7 @@ export default function LayoutPublic() {
 
   return (
     <>
-      <div className=" bg-slate-500 min-h-screen w-max pt-20">
+      <div className=" bg-slate-500 min-h-screen pt-20">
         <TopBar />
         <div className="flex pt-10">
           <SideBar />
